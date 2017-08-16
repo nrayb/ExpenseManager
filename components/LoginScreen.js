@@ -25,6 +25,11 @@ const LoginScreenConstants = {
 }
 
 export class LoginScreen extends Component {
+  // Ideally we wouldn't want the header of the app to show up,
+  // But I added this for testing's sake. will remove in the future
+  static navigationOptions = {
+    title: 'Welcome',
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -35,49 +40,52 @@ export class LoginScreen extends Component {
 
   render() {
     return (
-      <View style={loginViewStyles.container}>
+      <View style={loginViewStyles.loginContainer}>
         <Text style={loginViewStyles.usernameLabel} numberOfLines={1} selectable={false}>
           {LoginScreenConstants.labels.usernameLabel}
         </Text>
-        <TextInput style={loginViewStyles.usernameInput}/>
+        <TextInput style={loginViewStyles.usernameInput}
+                   placeholder="Please type your username"/>
         <Text style={loginViewStyles.passwordLabel} numberOfLines={1} selectable={false}>
           {LoginScreenConstants.labels.passwordLabel}
         </Text>
-        <TextInput style={loginViewStyles.passwordInput}/>
-        <Button style={loginViewStyles.submitButton}/>
+        <TextInput style={loginViewStyles.passwordInput}
+                   placeholder="Please enter your password"/>
+        <Button title='Submit'
+                style={loginViewStyles.submitButton}/>
       </View>
     );
   }
 }
 
 const loginViewStyles = StyleSheet.create({
-  container: {
+  loginContainer: {
     flex: 1,
     flexDirection: 'column',
     // Tells us how its children will be laid our in the primary direction (column in this case)
     justifyContent: 'center',
     // Tells us how its children will be laid our in the secondary direction (row in this case)
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'green'
   },
   usernameLabel: {
-    flex: 1,
+    height: 25,
     textAlign: 'left',
   },
   usernameInput: {
-    flex: 1,
+    height: 25,
     textAlign: 'left',
   },
   passwordLabel: {
-    flex: 1,
+    height: 25,
     textAlign: 'left',
   },
   passwordInput: {
-    flex: 1,
+    height: 25,
     textAlign: 'left',
   },
   submitButton: {
-    flex: 1,
+    height: 25,
     textAlign: 'left',
   }
 });
