@@ -4,7 +4,8 @@
  * Simple purpose of a mock login screen.
  * TODO: Polish UI with wanted colour and styling
  * TODO: Add authentication logic
- * TODO: Create centralized location for 
+ * TODO: Create centralized location for translatable strings
+ * TODO: Remove hardcoded font sizes. The sizes should be different for different screen sizes
  */
 
 import React, { Component } from 'react';
@@ -19,17 +20,13 @@ import {
 
 const LoginScreenConstants = {
   labels: {
-    usernameLabel: "Username",
-    passwordLabel: "Password"
+    username: "Username",
+    password: "Password",
+    login: "Login"
   }
 }
 
 export class LoginScreen extends Component {
-  // Ideally we wouldn't want the header of the app to show up,
-  // But I added this for testing's sake. will remove in the future
-  static navigationOptions = {
-    title: 'Welcome',
-  };
   constructor(props) {
     super(props);
     this.state = {
@@ -41,18 +38,17 @@ export class LoginScreen extends Component {
   render() {
     return (
       <View style={loginViewStyles.loginContainer}>
-        <Text style={loginViewStyles.usernameLabel} numberOfLines={1} selectable={false}>
-          {LoginScreenConstants.labels.usernameLabel}
-        </Text>
-        <TextInput style={loginViewStyles.usernameInput}
-                   placeholder="Please type your username"/>
-        <Text style={loginViewStyles.passwordLabel} numberOfLines={1} selectable={false}>
-          {LoginScreenConstants.labels.passwordLabel}
-        </Text>
-        <TextInput style={loginViewStyles.passwordInput}
-                   placeholder="Please enter your password"/>
-        <Button title='Submit'
-                style={loginViewStyles.submitButton}/>
+        <TextInput style={[loginViewStyles.authenticationInput, loginViewStyles.usernameInput]}
+                   placeholder={LoginScreenConstants.labels.username}/>
+        <TextInput style={[loginViewStyles.authenticationInput, loginViewStyles.passwordInput]}
+                   placeholder={LoginScreenConstants.labels.password}/>
+        <Button title={LoginScreenConstants.labels.login}
+                raised
+                buttonStyle={loginViewStyles.loginButton}
+                textStyle={loginViewStyles.loginButtonText}
+                onPress= { () => {
+                  // Do something
+                }}/>
       </View>
     );
   }
@@ -61,33 +57,35 @@ export class LoginScreen extends Component {
 const loginViewStyles = StyleSheet.create({
   loginContainer: {
     flex: 1,
-    flexDirection: 'column',
-    // Tells us how its children will be laid our in the primary direction (column in this case)
     justifyContent: 'center',
-    // Tells us how its children will be laid our in the secondary direction (row in this case)
     alignItems: 'center',
-    backgroundColor: 'green'
+    backgroundColor: 'rgb(122,204,122)',
   },
-  usernameLabel: {
-    height: 25,
+  authenticationInput: {
+    height: 30,
+    width: '75%',
+    paddingLeft: 12,
+    fontSize: 12,
     textAlign: 'left',
+    backgroundColor: 'white',
   },
   usernameInput: {
-    height: 25,
-    textAlign: 'left',
-  },
-  passwordLabel: {
-    height: 25,
-    textAlign: 'left',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5
   },
   passwordInput: {
-    height: 25,
-    textAlign: 'left',
+    borderTopWidth: 1,
+    borderTopColor: 'rgb(122,204,122)',
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5
   },
-  submitButton: {
+  loginButton: {
     height: 25,
-    textAlign: 'left',
+    borderColor: 'white',
+    textAlign: 'left'
+  },
+  loginButtonText: {
+    color: 'white',
+    fontSize: 30
   }
 });
-
-// AppRegistry.registerComponent('LoginScreen', () => LoginScreen);

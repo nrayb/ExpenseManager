@@ -12,7 +12,12 @@ import { LoginScreen } from './components/LoginScreen.js'
 const ExpenseManager = StackNavigator({
   // TODO: Ofcourse we have to add a lot more logic here
   // and a lot of handlers for multiple screens
-  Login: { screen: LoginScreen }
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: {
+      header: null
+    }
+  }
 });
 
 AppRegistry.registerComponent('ExpenseManager', () => ExpenseManager);
